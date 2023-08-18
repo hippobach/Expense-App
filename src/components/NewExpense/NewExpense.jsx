@@ -1,7 +1,12 @@
+// Library
 import React, { useState } from 'react';
+import classNames from 'classnames/bind';
 
+// Configuration Files
 import ExpenseForm from './ExpenseForm';
-import './NewExpense.css';
+import styles from './NewExpense.module.scss';
+
+const cx = classNames.bind(styles);
 
 const NewExpense = (props) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -24,16 +29,9 @@ const NewExpense = (props) => {
   };
 
   return (
-    <div className='new-expense'>
-      {!isEditing && (
-        <button onClick={startEditingHandler}>Add New Expense</button>
-      )}
-      {isEditing && (
-        <ExpenseForm
-          onSaveExpenseData={saveExpenseDataHandler}
-          onCancel={stopEditingHandler}
-        />
-      )}
+    <div className={cx('new-expense')}>
+      {!isEditing && <button onClick={startEditingHandler}>Add New Expense</button>}
+      {isEditing && <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} onCancel={stopEditingHandler} />}
     </div>
   );
 };
